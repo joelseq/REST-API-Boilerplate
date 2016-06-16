@@ -1,8 +1,11 @@
 'use strict';
 
 const gulp         = require('gulp'),
+      del          = require('del'),
       sass         = require('gulp-sass'),
       babel        = require('gulp-babel'),
+      watch        = require('gulp-watch'),
+      batch        = require('gulp-batch'),
       cssnano      = require('gulp-cssnano'),
       nodemon      = require('gulp-nodemon'),
       sourcemaps   = require('gulp-sourcemaps'),
@@ -29,10 +32,18 @@ gulp.task('workflow', function() {
 //===========================
 // Transpiling ES6 to ES5
 //===========================
-gulp.task('build', function() {
-  gulp.src('src/**/*.js')
+gulp.task('build', ['clean'], function() {
+  gulp.src('./src/**/*.js')
     .pipe(babel())
-  .pipe(gulp.dest('build'))
+  .pipe(gulp.dest('./build'))
+});
+
+
+//===========================
+// Clean Build directory
+//===========================
+gulp.task('clean', function() {
+  del(['./build']);
 });
 
 
@@ -49,9 +60,13 @@ gulp.task('nodemon', function() {
 //======================================
 // Watch files and call appropriate task
 //======================================
-gulp.task('watch', function() {
-  gulp.watch('./src/**/*.scss', ['workflow']);
-  gulp.watch('./src/**/*.js', ['build']);
+gulp.task('watch', function () {
+    watch('./src/**/*.js', batch(function (events, done) {
+        gulp.start('build', done);
+    }));
+    watch('./src/sass/**/*.scss', batch(function (events, done) {
+        gulp.start('workflow', done);
+    }));
 });
 
 gulp.task('default', ['workflow', 'build', 'watch', 'nodemon']);
