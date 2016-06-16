@@ -3,6 +3,8 @@
   "version": "1.0.0",
   "description": "A simple REST API backend",
   "scripts": {
+    "start": "npm run build; node ./bin/www",
+    "build": "gulp build; gulp workflow",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
@@ -17,10 +19,16 @@
     "gulp-autoprefixer": "^3.1.0",
     "gulp-babel": "^6.1.2",
     "gulp-cssnano": "^2.1.2",
+    "gulp-nodemon": "^2.1.0",
     "gulp-sass": "^2.3.2",
     "gulp-sourcemaps": "^1.6.0"
   },
   "dependencies": {
-    "dotenv": "^2.0.0"
+    "body-parser": "^1.15.1",
+    "dotenv": "^2.0.0",
+    "express": "^4.14.0",
+    "http-status": "^0.2.3",
+    "mongoose": "^4.5.0",
+    "morgan": "^1.7.0"
   }
 }
