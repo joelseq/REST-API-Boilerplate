@@ -4,9 +4,9 @@
 const status = require('http-status');
 const express = require('express');
 const jwt = require('jsonwebtoken');
+const User = require('../models/user');
 
 const router = express.Router();
-const User = require('../models/user');
 
 require('dotenv').config();
 

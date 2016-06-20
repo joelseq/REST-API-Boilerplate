@@ -6,9 +6,9 @@
 var status = require('http-status');
 var express = require('express');
 var jwt = require('jsonwebtoken');
+var User = require('../models/user');
 
 var router = express.Router();
-var User = require('../models/user');
 
 require('dotenv').config();
 
