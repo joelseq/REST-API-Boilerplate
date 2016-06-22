@@ -53,7 +53,7 @@ gulp.task('clean', function() {
 gulp.task('nodemon', function() {
   return nodemon({
     script: 'bin/www',
-    ignore: ['public']
+    ignore: ['public', 'build']
   });
 });
 
