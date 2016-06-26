@@ -12,10 +12,6 @@ const router = express.Router();
 //==============================
 // Routes
 //==============================
-router.get("/", (req,res) => {
-  res.sendFile('public/index.html');
-});
-
 router.get("/dashboard", passport.authenticate('jwt', { session: false }), (req,res) => {
   res.send(`It worked! User id is: ${req.user._id}.`);
 });
